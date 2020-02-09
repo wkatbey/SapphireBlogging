@@ -1,0 +1,55 @@
+.navbar-container {
+    list-style-type: none;
+
+    padding-left: 0;
+    padding-top: 1.5rem;
+}
+
+.nav-item.right-align {
+    margin-left: auto;
+}
+
+.nav-item .nav-text {
+    font-size: 1.25rem;
+    font-weight: 400;
+    border-bottom: 0.25rem solid transparent;
+    fill: white;
+}
+
+.nav-item {
+    margin-left: 3rem;
+    display: inline;
+}
+
+.nav-item svg {
+    width: 3rem;
+    height: 3rem;
+}
+
+.nav-text--dark {
+    color: black;
+}
+
+.nav-text--light {
+    color: white;
+}
+
+.nav-text--dark:hover {
+    color: gray;
+    /*border-bottom-color: gray;*/
+}
+
+.nav-text--light:hover {
+    color: #cccecf;
+    fill: #cccecf;
+}
+
+.navbar-desktop {
+    display: block;
+}
+
+@media (min-width: 300px) and (max-width: 1000px) {
+    .nav-item {
+        margin-left: 1.4rem;
+    }
+}

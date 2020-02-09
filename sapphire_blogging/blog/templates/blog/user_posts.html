@@ -1,0 +1,61 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %} 
+
+{% block hero-image-type %}
+<div class="hero-sub-image hero-sm light-purple">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    {{ user_viewed.first_name }} {{user_viewed.last_name}}'s Blog
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div class="container">
+    {% for blog in blogs %}
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="reading-font">
+                <a  class="gray-link user-blog-heading" 
+                    href="{% url 'blog:blog-detail' blog.id %}">{{ blog.title }}</a>
+                {% if blog.private %}
+                <span class="blog-heading-icon no-padding">
+                  <svg>
+                    <use href="{% static 'blog/icons/lock.svg#lock' %}"></use>
+                  </svg>
+                </span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <p class="blog-metadata">
+          {{ blog.date_of_submission }}
+          {% if user.is_authenticated and blog.author.id == user.id %}
+          <a class="gray-link blog-heading-icon" href="{% url 'blog:blog-update' blog.id %}">
+              <i class="fas fa-edit"></i>
+          </a>
+          <a href="{% url 'blog:blog-delete' blog.id %}" class="gray-link blog-heading-icon">
+              <i class="far fa-trash-alt"></i>
+          </a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    <div class="row blog-entry-row">
+        <div class="col-lg-6">
+            {{ blog.text_entry | linebreaks }}
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

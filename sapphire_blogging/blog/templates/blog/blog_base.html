@@ -1,0 +1,107 @@
+{% extends 'static_website/base.html' %} 
+{% load static %} 
+
+{% block head_elements %}
+<link rel="stylesheet" href="{% static 'blog/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'blog/spacing.css' %}"> 
+<link rel="stylesheet" href="{% static 'blog/fonts.css' %}">
+{% block custom_blog_head_elements %}
+{% endblock %}
+{% endblock %} 
+
+
+
+{% block body %}
+
+<div class="container">
+    {% block blog_heading %}
+    
+        <p class="heading-text padding-top padding-bottom text-center">
+            Portal 
+            <span class="blog-heading-icon">
+                <i class="fas fa-wine-glass-alt"></i>
+            </span>
+        </p>
+    {% endblock %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    {% block navbar_item_1 %}
+                        <div class="blog-nav-item">
+                            <i class="fas fa-bars"></i>
+                            <a class="gray-link" href="{% url 'blog:blog-list' %}">
+                                Portal
+                            </a>
+                        </div>
+                    {% endblock %}
+
+                    {% if user.is_authenticated %}
+                    {% block navbar_item_2 %}
+                        <div class="blog-nav-item">
+                            <i class="fas fa-edit"></i>
+                            <a class="gray-link" href="{% url 'blog:blog-create' 'none' %}">
+                                Write
+                            </a>
+                        </div>
+                    {% endblock %}
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        {% block navbar_item_3 %}
+                            <div class="blog-nav-item">
+                                <i class="fas fa-th-large"></i> 
+                                <a class="gray-link" href="{% url 'blog:user-posts' user.id %}">
+                                    My Blog
+                                </a>
+                            </div>
+                        {% endblock %}
+
+                        {% block navbar_item_4 %}
+                            <div class="blog-nav-item">
+                                <i class="fas fa-users"></i> 
+                                <a class="gray-link" href="{% url 'user:user-list' %}">
+                                    Users
+                                </a>
+                            </div>
+                        {% endblock %}
+
+                        {% block navbar_item_5 %}
+                            <div class="blog-nav-item">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <a class="gray-link" href="{% url 'user:logout' %}">
+                                    Log out
+                                </a>
+                            </div> 
+                        {% endblock %}
+                    {% else %}
+                        {% block navbar_item_76 %}
+                            <div class="blog-nav-item">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <a class="gray-link" href="{% url 'user:login' %}">
+                                    Log in 
+                                </a>
+                            </div>  
+                        {% endblock %}
+                        {% block navbar_item_7 %}
+                            <div class="blog-nav-item">
+                                <i class="fas fa-address-card"></i>
+                                <a class="gray-link" href="{% url 'user:register' %}">
+                                    Register 
+                                </a>
+                            </div>  
+                        {% endblock %}  
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    <hr>
+    </div>
+
+    {% block blog_body %}
+
+    {% endblock %}
+
+{% endblock %}
+
+

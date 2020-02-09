@@ -1,0 +1,20 @@
+.blog-entry-row {
+	margin-bottom: 3rem;
+}
+
+.blog-heading-icon {
+    padding-left: 1rem;
+}
+
+.blog-heading-icon.no-padding {
+	padding-left: 0;
+}
+
+.blog-heading-icon svg {
+	width: 1.5rem;
+	height: 1.1rem;
+}
+
+#editor-container {
+    height: 28rem;
+}

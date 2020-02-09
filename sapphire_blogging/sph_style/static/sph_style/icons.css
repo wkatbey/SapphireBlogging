@@ -1,0 +1,10 @@
+.icon-heading-container {
+    display: flex;
+    justify-content: center;
+}
+
+.heading-icon {
+    font-size: 2rem !important; 
+    padding-left: 0.9rem; 
+    padding-top: .7rem;
+}

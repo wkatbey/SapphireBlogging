@@ -1,0 +1,21 @@
+.blue-link {
+    color: #03c3ca;
+}
+
+.blog-nav-item {
+    padding-left: 1.2rem;
+    display: inline;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 700px) {
+    .blog-nav-item {
+        padding-left: 0rem;
+        display: block;
+        padding-top: 1rem;
+    }
+
+    .first-item {
+        padding-top: 0rem;
+    }
+}

@@ -1,0 +1,63 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %} 
+
+{% block hero-image-type %}
+<div class="hero-sub-image 
+            {% if user.is_authenticated %} 
+            purple
+            {% else %}
+            red
+            {% endif %}">
+{% endblock %} 
+
+{% block hero-image-text %}
+    <div class="container-fluid hero-sub-text">
+        {% if user.is_authenticated %}
+        <p class="hero-sub-heading text-center">Welcome, {{ user.first_name }}</p>
+        <p class="hero-sub-subheading text-center">
+            Read and Write Entries
+        </p>
+        {% else %}
+        <p class="hero-sub-heading text-center">Sapphire Blogging</p>
+        <p class="hero-sub-subheading text-center">
+            A Simple Journaling Platform
+        </p>
+        {% endif %}
+    </div>
+{% endblock %} 
+
+{% block blog_body %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <p class="heading-text text-center padding-top padding-bottom">
+        Current Topics
+        <span class="blog-heading-icon">
+            <i class="fas fa-glass-cheers"></i>
+        </span>
+    </p>
+    {% for blog in blog_entries %}
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="reading-font">
+                <a class="gray-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog.title }}</a>
+                {% if user.is_authenticated and blog.author.id == user.id %}
+                <a class="gray-link blog-heading-icon" href="{% url 'blog:blog-update' blog.id %}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'blog:blog-delete' blog.id %}" class="gray-link blog-heading-icon">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

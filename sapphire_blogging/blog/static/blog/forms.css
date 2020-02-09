@@ -1,0 +1,30 @@
+.text-lg-form-wrapper input:not(.btn-wide), 
+.text-lg-form-wrapper select {
+    height: 2rem !important;
+    font-size: 1.1rem !important;
+
+    border-image: linear-gradient(to right, #0852ff, #4b69fc);
+    border-image-slice: 1;
+}
+
+.text-lg-form-wrapper textarea {
+    font-size: 1.1rem !important;
+}
+
+.text-lg-form-wrapper label {
+    font-size: 1.2rem !important;
+}
+
+.text-lg-form-wrapper  label.custom-control-label {
+    color: #3432a8;
+}
+
+.btn-wide {
+    width: 15rem;
+    height: 3rem !important;
+    font-size: 1.3rem !important;
+}
+
+.dropdown-toggle-wide {
+    font-size: 1.3rem;
+}

@@ -1,0 +1,28 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %}
+
+{% block hero-image-type %}
+<div class="hero-sub-image hero-sm morning-red">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Confirmation
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+        <p class="reading-font">Are you sure you want to delete "{{ object.title }}"?</p>
+        <input type="submit" class="btn btn-outline-dark" value="Confirm">
+    </form>
+</div>
+
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

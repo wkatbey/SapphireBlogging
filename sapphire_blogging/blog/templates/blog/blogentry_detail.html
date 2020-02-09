@@ -1,0 +1,55 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %} 
+
+{% block hero-image-type %}
+<div class="hero-sub-image hero-sm morning-blue">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    {{ blog_entry.title }}
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <p class="blog-category">
+        {% for index, breadcrumb in breadcrumbs %}
+          <a href="{% url 'blog:blogs-by-category' breadcrumb.id %}" class="blog-category-link">{{ breadcrumb.title }}</a>
+          {% if index < breadcrumbs_max %}
+            /
+          {% endif %}
+        {% endfor %}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <p class="blog-metadata">
+          {{ blog_entry.date_of_submission }}
+          {% if user.is_authenticated and blog_entry.author.id == user.id %}
+          <a class="gray-link blog-heading-icon" href="{% url 'blog:blog-update' blog_entry.id %}">
+              <i class="fas fa-edit"></i>
+          </a>
+          <a href="{% url 'blog:blog-delete' blog_entry.id %}" class="gray-link blog-heading-icon">
+              <i class="far fa-trash-alt"></i>
+          </a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        {{ blog_entry.text_entry | linebreaks }}
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

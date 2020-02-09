@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400&display=swap');
+
+:root {
+    --gray-link: #696969;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
+
+.heading-text {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.subheading-text {
+    font-weight: 300;
+    font-size: 1.55rem;
+}
+
+.reading-font {
+    font-weight: 400;
+    font-size: 1.18rem;
+}
+
+.reading-font-lg {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.attribute-heading-text {
+    font-size: 1.75rem;
+}
+
+.attribute-body-text,
+.card-body-text {
+    font-size: 1rem;
+}
+
+.gray-link {
+    color: var(--gray-link);
+}

@@ -1,0 +1,82 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %}
+
+{% block custom_blog_head_elements %}
+<link rel="stylesheet" href="{% static 'blog/forms.css' %}">
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-sub-image hero-sm deep-blue">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Write Away  <img src="https://img.icons8.com/cute-clipart/64/000000/airplane-window-open.png">
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div class="container">
+    <form id='blog-form' method='POST' class='text-lg-form-wrapper'>
+      {% csrf_token %}
+      <div class="form-group padding-top">
+        <div class="col-lg-7 form-center">
+          {{ form.category.label_tag }}
+          {{ form.category }}  
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-7 form-center">
+          {{ form.title.label_tag }}
+          {{ form.title }}
+        </div>
+      </div>
+      <div class="form-group pt-2">
+        <div class="col-lg-7 form-center">
+          {{ form.text_entry }}
+        </div>
+      </div>
+      <div class="form-group pt-2">
+        <div class="col-lg-7 form-center">
+          <div class=" {% if object %} text-right {% else %} text-center {% endif %}">
+            {% if object %}
+            <div class="custom-control custom-checkbox mr-sm-2" style="display: inline-block">
+              {{ form.private }}
+              <label class="custom-control-label" for="make-post-private">Make Post Private</label>
+            </div>
+            <button type="submit" class="btn btn-outline-blue--dark btn-wide">Save Changes</button>
+            {% else %}
+            <div class="btn-group">
+              <input type="submit" class="btn btn-borderless-deep-blue btn-wide" value="Post">
+              
+              <button type="button" class="btn btn-borderless-deep-blue dropdown-toggle dropdown-toggle-wide" 
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Post Options Dropdown</span>
+              </button>
+  
+              <div class="dropdown-menu">
+                <a type="button" class="btn btn-outline-primary dropdown-item" onClick='submitPrivatePost()'>Post Privately</a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+        <a class="text-muted" href="https://icons8.com/icon/77154/identity-theft">
+            Check out Icons8! I used their icons
+        </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+.buttons {
+    margin: 10%;
+    text-align: center;
+}
+
+.btn-outline-blue--light {
+    width: 15rem;
+    height: 4rem;
+    
+    color: white;
+
+    font-size: 1.6rem;
+
+    background-color: transparent;
+
+    border-image: linear-gradient(to right, #87d3ff, #ffffff);
+
+    border-image-slice: 1;
+
+
+    border-width: 0.1rem;
+}
+
+.btn-outline-blue--dark {
+    width: 15rem;
+    height: 4rem;
+    
+    color: #3432a8;
+
+    font-size: 1.6rem;
+
+    background-color: transparent;
+
+    border-image: linear-gradient(to right, #3936ff, #3c00ff);
+
+    border-image-slice: 1;
+
+
+    border-width: 0.1rem;
+}
+
+.btn-outline-blue--light:hover {
+    cursor: pointer;
+    background-color: rgba(253, 252, 255, 0.4);
+}
+
+.btn-outline-blue--dark:hover {
+    cursor: pointer;
+    background-color: rgba(38, 0, 255, 0.2);
+}
+
+.btn-borderless-purple {
+    background-color: transparent;
+    border-image-slice: 0;
+    border-width: 0 !important;
+    color: #dc4bfc;
+}
+
+.btn-borderless-deep-blue {
+    background-color: transparent;
+    border-image-slice: 0;
+    border-width: 0 !important;
+    color: #1900ff;
+}
+
+.btn-borderless-deep-blue:hover {
+    cursor: pointer;
+
+    background-image: linear-gradient(
+        to right,
+        rgba(193, 189, 255, 0.1),
+        rgba(17, 0, 255, 0.2),
+        rgba(193, 189, 255, 0.1)
+    );
+
+    border-width: 0 !important;
+}
+
+
+.btn-borderless-purple:hover {
+    cursor: pointer;
+
+    background-image: linear-gradient(
+        to right,
+        rgba(230, 227, 255, 0.1),
+        rgba(60, 0, 255, 0.1),
+        rgba(230, 227, 255, 0.1)
+    );
+
+    border-width: 0 !important;
+}
+
+

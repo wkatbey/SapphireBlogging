@@ -1,0 +1,11 @@
+/* These styles are a temporary work-around to Crispy Form's
+    styling of the registration form. */
+
+.text-lg-form-wrapper small {
+    margin-top: 0.5rem;
+}
+
+.text-lg-form-wrapper small ul {
+    list-style-type: none;
+    padding-left: 0;
+}
