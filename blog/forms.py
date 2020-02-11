@@ -47,3 +47,33 @@ class BlogEntryForm(ModelForm):
         blog_instance.date_updated = datetime.now()
 
         return blog_instance
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = (
+            'title',
+            'description',
+            'parent',
+        )
+
+        widgets = {
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4
+                }
+            ),
+            'parent': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                },
+                choices=[Category.objects.all()]
+            )
+        }
+

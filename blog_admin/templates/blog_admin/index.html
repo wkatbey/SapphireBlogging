@@ -1,0 +1,25 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %}
+
+{% block hero-image-type %}
+<div class="hero-sub-image hero-sm morning-red">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Administration -- =)
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div id='blog-admin'>
+	[[ testInfo ]] 
+</div>
+{% endblock %}
+
+{% block blog_custom_js_includes %}
+<script type="module" src="{% static 'blog_admin/js/blog_admin.js' %}"></script>
+{% endblock %}
