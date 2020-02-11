@@ -1,0 +1,96 @@
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blogging -- Modern and Personal">
+    <meta name="author" content="Sapphire Design">
+    <title>Sapphire Blogging</title>
+    <link rel="stylesheet" href="{% static 'sph_style/framework.css' %}">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {% block head_elements %}
+    {% endblock %}
+</head>
+<body class="bg-light">
+
+{% block hero-image-type %}
+<div class = "hero-image">
+{% endblock %}
+ <nav>
+    <ul class="navbar-container">
+    {% block desktop-home-nav %}
+      <li class="nav-item">
+        <a class="nav-text nav-text--light" href="">
+          <svg>
+            <use href="{% static 'sph_style/icons/home.svg#home' %}"></use>
+          </svg> 
+        </a>
+      </li>
+    {% endblock %}
+    {% block desktop-resume-nav %}
+      <li class="nav-item">
+        <a class="nav-text nav-text--light" href="">
+          <svg>
+            <use href="{% static 'sph_style/icons/resume.svg#resume' %}"></use>
+          </svg>
+        </a>
+      </li>
+    {% endblock %}
+    {% block desktop-blog-nav %}
+      <li class="nav-item">
+        <a class="nav-text nav-text--light" href="{% url 'blog:blog-list' %}">
+          <svg>
+            <use href="{% static 'sph_style/icons/blog.svg#blog' %}"></use>
+          </svg>
+          <!-- <span class="svg-text">SkyBlue Blogging</span> -->
+        </a>
+      </li>
+    {% endblock %}
+    {% block blog-profile-link %}
+    {% endblock %}
+    {% block blog-create-link %}
+    {% endblock %}
+      <li class = "nav-item">
+        <a class="nav-text nav-text--light" href="http://github.com/wkatbey">
+          <svg>
+            <use href="{% static 'sph_style/icons/github.svg#github' %}"></use>
+          </svg>
+          <!-- <span class="svg-text">Github</span> -->
+        </a>
+      </li>
+    </ul>
+  </nav>
+  {% block hero-image-text %}
+  <div class = "hero-text text-center">
+  </div>
+  {% endblock %}
+</div>
+
+
+{% block body %}
+
+{% endblock %}
+
+<footer class="footer" style = "margin-top: 5%">
+{% block custom_footer_elements %}
+
+{% endblock %}   
+</footer>
+
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.1.0/email.min.js"></script>
+<script src="{% static 'blog/js/blogentry_form.js' %}"></script>
+</body>
+</html>
