@@ -1,3 +1,63 @@
+.sapphire-form-wrapper .form-lg {
+    font-size: 1.5rem;
+}
+
+.sapphire-form-wrapper {
+    color: #dc4bfc;
+}
+
+.sapphire-form-wrapper small {
+    color: #4b69fc !important;
+}
+
+.sapphire-form-wrapper input {
+    border-image: linear-gradient(to right, #dc4bfc, #4b69fc);
+
+    border-image-slice: 1;
+
+    border-width: 0.1rem;
+
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    
+    color: #4b69fc;
+}
+
+.sapphire-form-wrapper select {
+    border-image: linear-gradient(to right, #0852ff, #4b69fc);
+    border-image-slice: 1;
+
+    color: #4b69fc;
+}
+
+.sapphire-form-wrapper textarea {
+    border-image: linear-gradient(to right, #0852ff, #4b69fc);
+    border-image-slice: 1;
+    color: #4b69fc;
+}
+
+.sapphire-form-wrapper input:focus, 
+.sapphire-form-wrapper textarea:focus, 
+.sapphire-form-wrapper select:focus  {
+    color: #dc4bfc;
+}
+
+.form-columned {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-columned  .form-left {
+    order: 0;
+    margin-right: 20rem;
+    width: 100%;
+}
+
+.form-columned  .form-right {
+    order: 1;
+    width: 100%;
+}
+
 .text-lg-form-wrapper {
     font-size: 1.5rem;
     color: #dc4bfc;
