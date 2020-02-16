@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import CategorySerializer
 from blog.models import Category
+from rest_framework import status
 
 @api_view(['GET'])
 def get_blog_categories(request):
@@ -14,11 +15,11 @@ def get_blog_categories(request):
 
 @api_view(['POST'])
 def create_blog_category(request):
-	serializer = CategorySerializer(request.data)
-	
-	created_category = serializer.save()
+	serializer = CategorySerializer(data=request.data)
+	serializer.is_valid()
 
-	serializer = CategorySerializer(data=created_category)
+	serializer.save()
+
 	return Response(serializer.data)
 
 

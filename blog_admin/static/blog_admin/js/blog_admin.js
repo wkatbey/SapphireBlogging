@@ -22,7 +22,7 @@ let blogAdmin = new Vue({
 				body: JSON.stringify(this.categoryForm),
 				headers: {
 					'Content-Type': 'application/json',
-					'X-CSRF-TOKEN': getCookie('CSRF-TOKEN')
+					'X-CSRFToken': getCookie('csrftoken')
 				}
 			});
 		},
@@ -41,14 +41,13 @@ let blogAdmin = new Vue({
 	}
 });
 
-
 function getCookie(name) {
-    let cookieValue = null;
+    var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
-        let cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].trim();
-			
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
