@@ -10,7 +10,10 @@
 
 {% block blog_heading %}
 <p class="heading-text padding-top padding-bottom text-center">
-    Administration =)
+    Administration 
+    <svg>
+        <use href="{% static 'sph_style/icons/home.svg' %}"></use>
+    </svg> 
 </p>
 {% endblock %}
 
@@ -51,8 +54,8 @@
                     <label for="category_search">Select a Category</label>
                     <input type="text" class="form-control" v-model="categoryCriteria.title" @keyup="getCategoriesByTitle()">
                 </div>
-                <div class="row padding-top">
-                    <a v-for="category in categoryCriteria.results" @click="getCategoryToEdit(category)">[[category.title]]</a>
+                <div v-for="category in categoryCriteria.results" class="row padding-top">
+                    <a  @click="getCategoryToEdit(category)">[[category.title]]</a>
                 </div>
             </div>        
     </div>

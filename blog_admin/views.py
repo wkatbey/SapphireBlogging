@@ -13,6 +13,12 @@ def get_blog_categories(request):
 	serializer = CategorySerializer(Category.objects.all(), many=True)
 	return Response(serializer.data)
 
+@api_view(['GET'])
+def get_blog_category_by_title(request, title):
+	serializer = CategorySerializer(Category.objects.filter(title__contains=title), many=True)
+
+	return Response(serializer.data)
+
 @api_view(['POST'])
 def create_blog_category(request):
 	serializer = CategorySerializer(data=request.data)
@@ -38,4 +44,12 @@ class Dashboard(View):
 
 		return render(request, self.template_name, context)
 
+
+class SphStyleBase(View):
+	template_name='sph_style/base.html'
+
+	def get(self, request):
+		context = { }
+
+		return render(request, self.template_name, context)
 

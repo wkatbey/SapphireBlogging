@@ -5,7 +5,11 @@ let blogAdmin = new Vue({
 		testInfo: '',
 		categoryForm: {
 			title: '',
-			parent: ''
+			parent: '',
+			resetForm: function() {
+				this.title = '';
+				this.parent = '';
+			}
 		},
 		categoryCriteria: {
 			title: '',
@@ -24,10 +28,19 @@ let blogAdmin = new Vue({
 					'Content-Type': 'application/json',
 					'X-CSRFToken': getCookie('csrftoken')
 				}
+			}).then(response => {
+				this.categoryForm.resetForm();
 			});
 		},
 		getCategoriesByTitle() {
-			
+			const title = this.categoryCriteria.title;
+			const url = `api/GetCategoriesByTitle/${title}`;
+
+			fetch(url).then(response => {
+				return response.json();
+			}).then(categories => {
+				this.categoryCriteria.results = categories;
+			})
 		},
 		getCategoryToEdit() {
 
@@ -35,9 +48,10 @@ let blogAdmin = new Vue({
 	},
 	mounted() {
 		fetch('api/GetAllCategories/')
-		.then(response => this.testInfo = response.json().then((categories) => {
+		.then(response => response.json())
+		.then((categories) => {
 			this.categories = categories;
-		}))
+		});
 	}
 });
 
