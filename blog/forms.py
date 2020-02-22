@@ -41,12 +41,19 @@ class BlogEntryForm(ModelForm):
             )
         }
 
-    def save(self, commit=True):
+    def create(self, commit=True):
         blog_instance = super(BlogEntryForm, self).save(commit=False)
         blog_instance.date_of_submission = datetime.now()
         blog_instance.date_updated = datetime.now()
 
         return blog_instance
+
+    def update(self):
+        blog_instance = super(BlogEntryForm, self).save(commit=False)
+        blog_instance.date_updated = datetime.now()
+
+        return blog_instance
+
 
 class CategoryForm(ModelForm):
     class Meta:

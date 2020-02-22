@@ -118,7 +118,7 @@ class BlogEntryCreate(LoginRequiredMixin, CreateView):
         return login_url
 
     def form_valid(self, form):
-        blog = form.save()
+        blog = form.create()
         blog.author = self.request.user
 
         # If 'private' is specified in the url following the view's base url,
@@ -139,7 +139,7 @@ class BlogEntryUpdate(LoginRequiredMixin, UpdateView):
     form_class = BlogEntryForm
 
     def form_valid(self, form):
-        blog = form.save()
+        blog = form.update()
         blog.save()
         return HttpResponseRedirect(reverse_lazy('blog:blog-detail', kwargs = {
             'pk': blog.id

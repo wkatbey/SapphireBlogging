@@ -48,12 +48,6 @@
             <p class="reading-font">
                 <a class="gray-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog.title }}</a>
                 {% if user.is_authenticated and blog.author.id == user.id %}
-                <a class="gray-link blog-heading-icon" href="{% url 'blog:blog-update' blog.id %}">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <a href="{% url 'blog:blog-delete' blog.id %}" class="gray-link blog-heading-icon">
-                    <i class="far fa-trash-alt"></i>
-                </a>
                 {% endif %}
             </p>
         </div>
