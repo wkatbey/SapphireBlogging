@@ -49,8 +49,16 @@
     background-image: linear-gradient(to top, #8abdff, #6171ff);
 }
 
+.hero-sub-image.dusk-blue {
+    background-image: linear-gradient(to top, #5040ff, #4e43c4);
+}
+
 .hero-sub-image.morning-red {
     background-image: linear-gradient(to top, #ff8af7, #6171ff);
+}
+
+.hero-sub-image.deep-red {
+    background-image: linear-gradient(to top, #fa5760, #e31e28);
 }
 
 .hero-sub-image.morning-blue {
