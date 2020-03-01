@@ -8,7 +8,6 @@ class BlogEntryForm(ModelForm):
         model = BlogEntry
         fields = (
             'title',
-            #'primary_image',
             'category',
             'text_entry',
             'private'
