@@ -1,16 +1,17 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import CategorySerializer
 from blog.models import Category
-from rest_framework import status
+from rest_framework import serializers
 
 @api_view(['GET'])
 def get_blog_categories(request):
 	serializer = CategorySerializer(Category.objects.all(), many=True)
+
 	return Response(serializer.data)
 
 @api_view(['GET'])
@@ -22,11 +23,17 @@ def get_blog_category_by_title(request, title):
 @api_view(['POST'])
 def create_blog_category(request):
 	serializer = CategorySerializer(data=request.data)
-	serializer.is_valid()
+	try:
 
-	serializer.save()
+		serializer.is_valid(raise_exception=True)
 
-	return Response(serializer.data)
+		serializer.save()
+
+		return Response(serializer.data)
+	except (serializers.ValidationError, KeyError, ValueError) as e:
+		context = {'error': str(e)}
+		return Response(status=400, data=context)
+
 
 
 class Dashboard(View):

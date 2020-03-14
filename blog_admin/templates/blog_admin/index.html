@@ -36,16 +36,19 @@
          
                         <label for="category_parent">Parent</label>
                         <select class="custom-select" id="category_parent" v-model="categoryForm.parent">
-                            <option v-for="category in categories" value="category">[[category.title]]</option>
+                            <option v-for="category in categories" :value="category">[[category.title]]</option>
                         </select>
             
                 </div>
                 <div class="row padding-top">
-           
                         <button type="button" class="btn-outline-blue--dark btn-sm" @click="submitCategoryForm()">
-                            Create
+                            <span v-if="categoryForm.isEditInProgress">
+                                Save
+                            </span>
+                            <span v-else>
+                                Create
+                            </span>
                         </button>
-            
                 </div>
             </div>
       
@@ -55,7 +58,9 @@
                     <input type="text" class="form-control" v-model="categoryCriteria.title" @keyup="getCategoriesByTitle()">
                 </div>
                 <div v-for="category in categoryCriteria.results" class="row padding-top">
-                    <a  @click="getCategoryToEdit(category)">[[category.title]]</a>
+                    [[category.title]]
+                    <a href="javascript:;" @click="categoryForm.getCategoryToEdit(category)" class="ml-2">Edit</a>
+                    <a href="javascript:;" @click="deleteCategory(category)" class="ml-2">Delete</a>
                 </div>
             </div>        
     </div>

@@ -5,10 +5,16 @@ let blogAdmin = new Vue({
 		testInfo: '',
 		categoryForm: {
 			title: '',
-			parent: '',
+			parent: null,
+			isEditInProgress: false,
 			resetForm: function() {
 				this.title = '';
-				this.parent = '';
+				this.parent = null;
+			},
+			getCategoryToEdit: function(category) {
+			    this.title = category.title;
+                this.parent = category.parent;
+                this.isEditInProgress = true;
 			}
 		},
 		categoryCriteria: {
@@ -30,6 +36,7 @@ let blogAdmin = new Vue({
 				}
 			}).then(response => {
 				this.categoryForm.resetForm();
+				this.getAllCategories();
 			});
 		},
 		getCategoriesByTitle() {
@@ -42,16 +49,16 @@ let blogAdmin = new Vue({
 				this.categoryCriteria.results = categories;
 			})
 		},
-		getCategoryToEdit() {
-
+		getAllCategories() {
+		    fetch('api/GetAllCategories/')
+            .then(response => response.json())
+            .then((categories) => {
+                this.categories = categories;
+            });
 		}
 	},
 	mounted() {
-		fetch('api/GetAllCategories/')
-		.then(response => response.json())
-		.then((categories) => {
-			this.categories = categories;
-		});
+		this.getAllCategories();
 	}
 });
 
