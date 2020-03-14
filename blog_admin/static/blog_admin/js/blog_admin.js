@@ -6,38 +6,46 @@ let blogAdmin = new Vue({
 		categoryForm: {
 			title: '',
 			parent: null,
-			isEditInProgress: false,
 			resetForm: function() {
 				this.title = '';
 				this.parent = null;
-			},
-			getCategoryToEdit: function(category) {
-			    this.title = category.title;
-                this.parent = category.parent;
-                this.isEditInProgress = true;
 			}
 		},
 		categoryCriteria: {
 			title: '',
 			results: []
 		},
-		categories: [
-
-		]
+		categories: [],
+		isEditInProgress: false
 	},
 	methods: {
 		submitCategoryForm() {
-			fetch('api/CreateCategory/', { 
-				method: 'POST', 
-				body: JSON.stringify(this.categoryForm),
-				headers: {
-					'Content-Type': 'application/json',
-					'X-CSRFToken': getCookie('csrftoken')
-				}
-			}).then(response => {
-				this.categoryForm.resetForm();
-				this.getAllCategories();
-			});
+		    if (this.isEditInProgress) {
+		        fetch('api/UpdateCategory/', {
+                    method: 'PUT',
+                    body: JSON.stringify(this.categoryForm),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                }).then(response => {
+                    this.resetForm();
+                    this.getAllCategories();
+                });
+		    }
+		    else {
+		    	fetch('api/CreateCategory/', {
+                    method: 'POST',
+                    body: JSON.stringify(this.categoryForm),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                }).then(response => {
+                    this.resetForm();
+                    this.getAllCategories();
+                });
+		    }
 		},
 		getCategoriesByTitle() {
 			const title = this.categoryCriteria.title;
@@ -55,6 +63,15 @@ let blogAdmin = new Vue({
             .then((categories) => {
                 this.categories = categories;
             });
+		},
+		getCategoryToEdit(category) {
+		    this.categoryForm.title = category.title;
+		    this.categoryForm.parent = this.categories.find(x => x.id == category.parent.id);
+            this.isEditInProgress = true;
+		},
+		resetForm() {
+		    this.categoryForm.resetForm();
+		    this.isEditInProgress = false;
 		}
 	},
 	mounted() {

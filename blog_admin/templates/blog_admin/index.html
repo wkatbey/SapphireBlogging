@@ -42,7 +42,7 @@
                 </div>
                 <div class="row padding-top">
                         <button type="button" class="btn-outline-blue--dark btn-sm" @click="submitCategoryForm()">
-                            <span v-if="categoryForm.isEditInProgress">
+                            <span v-if="isEditInProgress">
                                 Save
                             </span>
                             <span v-else>
@@ -59,7 +59,7 @@
                 </div>
                 <div v-for="category in categoryCriteria.results" class="row padding-top">
                     [[category.title]]
-                    <a href="javascript:;" @click="categoryForm.getCategoryToEdit(category)" class="ml-2">Edit</a>
+                    <a href="javascript:;" @click="getCategoryToEdit(category)" class="ml-2">Edit</a>
                     <a href="javascript:;" @click="deleteCategory(category)" class="ml-2">Delete</a>
                 </div>
             </div>        
