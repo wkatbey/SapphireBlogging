@@ -8,17 +8,20 @@ from .serializers import CategorySerializer
 from blog.models import Category
 from rest_framework import serializers
 
+
 @api_view(['GET'])
 def get_blog_categories(request):
 	serializer = CategorySerializer(Category.objects.all(), many=True)
 
 	return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_blog_category_by_title(request, title):
 	serializer = CategorySerializer(Category.objects.filter(title__contains=title), many=True)
 
 	return Response(serializer.data)
+
 
 @api_view(['POST'])
 def create_blog_category(request):
@@ -34,6 +37,23 @@ def create_blog_category(request):
 		context = {'error': str(e)}
 		return Response(status=400, data=context)
 
+
+@api_view(['PUT'])
+def update_blog_category(request):
+    print("does this exist?", request.data['id'])
+    category = Category.objects.get(pk=request.data['id'])
+    serializer = CategorySerializer(category, data=request.data)
+    
+    try:
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data)
+    except (serializers.ValidationError, KeyError, ValueError) as e:
+        context = {'error': str(e)}
+        return Response(status=400, data=context)
 
 
 class Dashboard(View):

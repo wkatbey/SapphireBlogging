@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/GetAllCategories/', views.get_blog_categories),
     path('api/CreateCategory/', views.create_blog_category),
     path('api/GetCategoriesByTitle/<slug:title>', views.get_blog_category_by_title),
+    path('api/UpdateCategory/', views.update_blog_category),
 ]

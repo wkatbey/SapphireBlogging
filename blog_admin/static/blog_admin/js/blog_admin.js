@@ -3,7 +3,8 @@ let blogAdmin = new Vue({
 	delimiters: ['[[', ']]'],
 	data: {
 		testInfo: '',
-		categoryForm: {
+        categoryForm: {
+            id: null,
 			title: '',
 			parent: null,
 			resetForm: function() {
@@ -64,9 +65,10 @@ let blogAdmin = new Vue({
                 this.categories = categories;
             });
 		},
-		getCategoryToEdit(category) {
+        getCategoryToEdit(category) {
+            this.categoryForm.id = category.id;
 		    this.categoryForm.title = category.title;
-		    this.categoryForm.parent = this.categories.find(x => x.id == category.parent.id);
+            this.categoryForm.parent = this.categories.find(x => category.parent && x.id == category.parent.id);
             this.isEditInProgress = true;
 		},
 		resetForm() {
