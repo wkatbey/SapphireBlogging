@@ -6,21 +6,27 @@ let blogAdmin = new Vue({
         categoryForm: {
             id: null,
 			title: '',
-			parent: null,
+            parentModel: null,
+            parent: null,
 			resetForm: function() {
 				this.title = '';
-				this.parent = null;
-			}
+                this.parentModel = null;
+                this.parent = null;
+            },
+            preProcess: function () {
+                this.parent = this.parentModel.id;
+            }
 		},
 		categoryCriteria: {
 			title: '',
 			results: []
 		},
-		categories: [],
-		isEditInProgress: false
+		categories: []
 	},
 	methods: {
-		submitCategoryForm() {
+        submitCategoryForm() {
+            this.categoryForm.preProcess();
+
 		    if (this.isEditInProgress) {
 		        fetch('api/UpdateCategory/', {
                     method: 'PUT',
@@ -68,7 +74,7 @@ let blogAdmin = new Vue({
         getCategoryToEdit(category) {
             this.categoryForm.id = category.id;
 		    this.categoryForm.title = category.title;
-            this.categoryForm.parent = this.categories.find(x => category.parent && x.id == category.parent.id);
+            this.categoryForm.parentModel = this.categories.find(x => category.parent && x.id == category.parent.id);
             this.isEditInProgress = true;
 		},
 		resetForm() {
