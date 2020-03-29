@@ -54,6 +54,10 @@ class BlogEntryForm(ModelForm):
         return blog_instance
 
 
+class ReblogForm(BlogEntryForm):
+    
+
+
 class CategoryForm(ModelForm):
     class Meta:
         model = Category

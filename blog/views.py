@@ -119,6 +119,16 @@ class BlogEntryCreate(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse_lazy('blog:blog-list'))
 
 
+class CreateReblog(LoginRequiredMixin, CreateView):
+    model = BlogEntry
+    form_class = ReblogForm
+
+    def get_login_url(self):
+        login_url = reverse_lazy('user:login')
+
+        return login_url
+
+
 class BlogEntryUpdate(LoginRequiredMixin, UpdateView):
     model = BlogEntry
     form_class = BlogEntryForm
@@ -158,3 +168,4 @@ class MyPosts(View):
         }
 
         return render(request, self.template_name, context)
+

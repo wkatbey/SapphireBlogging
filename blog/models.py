@@ -53,7 +53,22 @@ class Category(models.Model):
         return breadcrumb[::-1]
 
 
+class BasePost(models.Model):
+    date_of_submission = models.DateTimeField()
+    date_updated = models.DateTimeField(default=None)
+    has_been_modified = models.BooleanField(default=False)
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+
 class BlogEntry(models.Model):
+
+    post = models.ForeignKey(
+            BasePost,
+            null=False,
+            blank=False,
+            on_delete=models.CASCADE
+    )
+
     title = models.CharField(
         max_length=100,
         verbose_name="Title"
@@ -61,10 +76,9 @@ class BlogEntry(models.Model):
 
     # primary_image = models.ImageField(verbose_name="Primary Image")
     text_entry = models.TextField()
-    date_of_submission = models.DateTimeField()
-    has_been_modified = models.BooleanField(default=False)
+
     date_updated = models.DateTimeField(default=None)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+
     private = models.BooleanField(default=False)
 
     category = models.ForeignKey(
@@ -86,3 +100,14 @@ class BlogEntry(models.Model):
             category = category.parent
 
         return breadcrumb[::-1]
+
+class ReblogEntry(models.Model):
+    reblogged_post = models.ForeignKey(
+        BasePost,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+
+    
+
