@@ -1,89 +1,16 @@
 from django import forms
-from django.forms import ModelForm
-from blog.models import BlogEntry, Category
-from datetime import datetime
-
-class BlogEntryForm(ModelForm):
-    class Meta:
-        model = BlogEntry
-        fields = (
-            'title',
-            'category',
-            'text_entry',
-            'private'
-        )
-
-        widgets = {
-            'category': forms.Select(
-                attrs = {
-                    'class': 'form-control'
-                },
-                choices = []
-            ),
-            'title': forms.TextInput(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
-            'text_entry': forms.Textarea(
-                attrs = {
-                    'id': 'text-editor',
-                    'class': 'form-control',
-                    'rows': '17'
-                }
-            ),
-            'private': forms.CheckboxInput(
-                attrs = {
-                    'id': 'make-post-private',
-                    'class': 'custom-control-input'
-                }
-            )
-        }
-
-    def create(self, commit=True):
-        blog_instance = super(BlogEntryForm, self).save(commit=False)
-        blog_instance.date_of_submission = datetime.now()
-        blog_instance.date_updated = datetime.now()
-
-        return blog_instance
-
-    def update(self):
-        blog_instance = super(BlogEntryForm, self).save(commit=False)
-        blog_instance.date_updated = datetime.now()
-
-        return blog_instance
 
 
-class ReblogForm(BlogEntryForm):
-    
+class EntryForm(forms.Form):
+	category_title = forms.CharField()
+	title = forms.CharField()
 
+	text_entry = forms.CharField()
 
-class CategoryForm(ModelForm):
-    class Meta:
-        model = Category
-        fields = (
-            'title',
-            'description',
-            'parent',
-        )
+	private = forms.BooleanField()
 
-        widgets = {
-            'title': forms.TextInput(
-                attrs={
-                    'class': 'form-control'
-                }
-            ),
-            'description': forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'rows': 4
-                }
-            ),
-            'parent': forms.Select(
-                attrs={
-                    'class': 'form-control'
-                },
-                choices=[Category.objects.all()]
-            )
-        }
+	def create():
+		pass
 
+	def update():
+		pass
