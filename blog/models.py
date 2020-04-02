@@ -31,6 +31,8 @@ class Category(models.Model):
         unique_together = ('slug', 'parent')
         verbose_name_plural = 'categories'
 
+        db_table = 'category'
+
     def __str__(self):
         full_path = [self.title]
         category = self.parent
@@ -60,6 +62,9 @@ class BasePost(models.Model):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
+    class Meta:
+        db_table = 'base_post'
+
 class BlogEntry(models.Model):
 
     post = models.ForeignKey(
@@ -88,6 +93,9 @@ class BlogEntry(models.Model):
         on_delete=models.CASCADE
     )
 
+    class Meta:
+        db_table = 'blog_entry'
+
     def get_absolute_url(self):
         return reverse('blog:blog-detail', args=[self.id])
 
@@ -108,6 +116,9 @@ class ReblogEntry(models.Model):
         blank=False,
         on_delete=models.CASCADE
     )
+
+    class Meta:
+        db_table = 'reblog_entry'
 
     
 
