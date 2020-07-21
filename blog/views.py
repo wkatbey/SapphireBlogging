@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.views.generic.edit import DeleteView, DetailView
+from django.views.generic import DeleteView, DetailView
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from blog.forms import EntryForm
-from blog.models import Entry, Category
+from blog.models import BlogEntry, Category
 from .helpers import get_blogs_by_category, remove_restricted_blogs
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,7 +15,7 @@ from operator import attrgetter
 class Portal(View):
     def get(self, request):
 
-        posts = get_all_posts(Entry.objects.all(), Reblog.objects.all())
+        posts = get_all_posts(BlogEntry.objects.all(), Reblog.objects.all())
         blogs = sorted(
             remove_restricted_blogs(blogs=blogs),
             key=attrgetter('date_of_submission'),
@@ -93,12 +93,12 @@ class UpdateEntry(LoginRequiredMixin, View):
 
 
 class DeleteEntry(LoginRequiredMixin, DeleteView):
-    model = Entry
+    model = BlogEntry
     success_url = reverse_lazy('blog:blog-list')
 
 
 class EntryDetail(DetailView):
-    model = Entry
+    model = BlogEntry
     context_object_name = 'blog_entry'
 
     def get(self, request, *args, **kwargs):
@@ -125,7 +125,7 @@ class MyPosts(View):
 
     def get(self, request, pk):
         user = User.objects.get(pk=pk)
-        blog_entries = list(Entry.objects.all().filter(author=user))
+        blog_entries = list(BlogEntry.objects.all().filter(author=user))
 
         if self.request.user != user:
             # Filtering out private entries if the user is viewing another user's
