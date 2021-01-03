@@ -31,5 +31,4 @@ def remove_restricted_blogs(blogs, user=None):
     )
 
 
-def get_all_posts(entries, reblogs):
-    pass
+    

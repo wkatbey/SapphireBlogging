@@ -13,14 +13,22 @@ from operator import attrgetter
 
 
 class Portal(View):
-    def get(self, request):
+    template_url = 'blog/blogentry_list.html'
 
-        posts = get_all_posts(BlogEntry.objects.all(), Reblog.objects.all())
+    def get(self, request):
+        blogs = BlogEntry.objects.all()
+
         blogs = sorted(
             remove_restricted_blogs(blogs=blogs),
             key=attrgetter('date_of_submission'),
             reverse=True
         )
+
+        context = {
+            'blogs': blogs
+        }
+
+        return TemplateResponse(request, self.template_url, context)
 
 
 class CreateEntry(LoginRequiredMixin, View):
@@ -36,7 +44,7 @@ class CreateEntry(LoginRequiredMixin, View):
             entryCreation: True
         }
 
-        return TemplateResponse(request, template_url, context)
+        return TemplateResponse(request, self.template_url, context)
 
 
     def post(self, request):
