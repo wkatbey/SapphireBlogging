@@ -39,7 +39,7 @@
                     {% block navbar_item_2 %}
                         <div class="blog-nav-item">
                             <i class="fas fa-edit"></i>
-                            <a class="gray-link" href="{% url 'blog:blog-create' 'none' %}">
+                            <a class="gray-link" href="{% url 'blog:new-entry' 'none' %}">
                                 Write
                             </a>
                         </div>
@@ -50,7 +50,7 @@
                         {% block navbar_item_3 %}
                             <div class="blog-nav-item">
                                 <i class="fas fa-th-large"></i> 
-                                <a class="gray-link" href="{% url 'blog:user-posts' user.id %}">
+                                <a class="gray-link" href="{% url 'blog:user-entries' user.id %}">
                                     My Blog
                                 </a>
                             </div>

@@ -42,16 +42,27 @@
             <i class="fas fa-glass-cheers"></i>
         </span>
     </p>
-    {% for blog in blog_entries %}
-    <div class="row">
-        <div class="col-lg-6">
-            <p class="reading-font">
-                <a class="gray-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog.title }}</a>
-                {% if user.is_authenticated and blog.author.id == user.id %}
-                {% endif %}
-            </p>
+    {% if blog_entries %}
+        {% for blog in blog_entries %}
+        <div class="row">
+            <div class="col-lg-6">
+                <p class="reading-font">
+                    <a class="gray-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog.title }}</a>
+                    {% if user.is_authenticated and blog.author.id == user.id %}
+                    {% endif %}
+                </p>
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="reading-font">
+                    Looks like there's nothing here
+                </p>
+            </div>
+        </div>
+    {% endif %}
+ 
 </div>
 {% endblock %}

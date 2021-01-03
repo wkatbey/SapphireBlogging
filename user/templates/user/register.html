@@ -1,0 +1,55 @@
+{% extends 'blog/blog_base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block custom_blog_head_elements %}
+<link rel="stylesheet" href="{% static 'user/forms.css' %}">
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-sub-image red">
+{% endblock %} 
+
+{% block hero-image-text %}
+    <div class="container-fluid hero-sub-text">
+        <p class="hero-sub-heading text-center">SkyBlue Blogging</p>
+        <p class="hero-sub-subheading text-center">
+            An Open-Source Platform
+        </p>
+    </div>
+{% endblock %} 
+
+{% block blog_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Create Your Blog
+</p>
+{% endblock %}
+
+{% block blog_body %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <form method="POST" class="text-lg-form-wrapper">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-lg-6 form-center">
+                {{ user_registration_form | crispy }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-6 form-center padding-top">
+                <input type="submit" class="btn btn-borderless-purple btn-block" value="Create Account">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}
