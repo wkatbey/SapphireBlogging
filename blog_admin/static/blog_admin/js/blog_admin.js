@@ -3,6 +3,7 @@ let blogAdmin = new Vue({
 	delimiters: ['[[', ']]'],
 	data: {
 		testInfo: '',
+		isEditInProgress: false,
         categoryForm: {
             id: null,
 			title: '',
@@ -14,7 +15,9 @@ let blogAdmin = new Vue({
                 this.parent = null;
             },
             preProcess: function () {
-                this.parent = this.parentModel.id;
+            	if (this.parentModel) {
+            		this.parent = this.parentModel.id;	
+            	}
             }
 		},
 		categoryCriteria: {
@@ -55,7 +58,10 @@ let blogAdmin = new Vue({
 		    }
 		},
 		getCategoriesByTitle() {
-			const title = this.categoryCriteria.title;
+			let title = this.categoryCriteria.title;
+
+			title = title ? title : "NO_CATEGORY";
+
 			const url = `api/GetCategoriesByTitle/${title}`;
 
 			fetch(url).then(response => {

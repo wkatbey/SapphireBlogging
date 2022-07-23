@@ -3,14 +3,13 @@ from django.views.generic import DeleteView, DetailView
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from blog.forms import EntryForm
 from blog.models import BlogEntry, Category
 from .helpers import get_blogs_by_category, remove_restricted_blogs
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from operator import attrgetter
-
+from blog.serializers import BlogEntrySerializer
 
 class Portal(View):
     template_url = 'blog/blogentry_list.html'
@@ -30,9 +29,8 @@ class Portal(View):
 
         return TemplateResponse(request, self.template_url, context)
 
-
 class CreateEntry(LoginRequiredMixin, View):
-    template_url = 'blog/entry-form.html'
+    template_url = 'blog/blogentry_form.html'
 
     def get_login_url(self):
         login_url = reverse_lazy('user:login')
@@ -41,30 +39,29 @@ class CreateEntry(LoginRequiredMixin, View):
 
     def get(self, request):
         context = {
-            entryCreation: True
+            'entryCreation': True
         }
 
         return TemplateResponse(request, self.template_url, context)
 
-
     def post(self, request):
-        form = EntryForm(request.POST)
+        blog_entry = BlogEntry()
+        blog_entry.date_of_submission = datetime
+        blog_entry.author = User.objects.filter()
+        blog_entry.title = request.POST.get('title');
+        blog_entry.text_entry = request.POST.get('text_entry')
+        blog_entry.private = request.POST.get('private')
+        blog_entry.category = Category.objects.filter()
 
-        if form.is_valid():
-            entry = form.create()
 
-            url = reverse_lazy('blog:entry-detail', kwargs={
-                'pk': entry.id
-            })
+        blog_entry_form = BlogEntryForm(request.POST)
+        blog_entry_form.save()
 
-            return HttpResponseRedirect(url)
+        url = reverse_lazy('blog:entry-detail', kwargs={
+            'pk': entry.id
+        })
 
-        context = {
-            'error_messages': form.error_messages
-        }
-
-        return TemplateView(request, self.template_url, context)
-
+        return HttpResponseRedirect(url)
 
 class UpdateEntry(LoginRequiredMixin, View):
     template_url = 'blog/entry-form.html'

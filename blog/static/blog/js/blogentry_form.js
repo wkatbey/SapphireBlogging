@@ -1,7 +1,32 @@
-function submitPrivatePost() {
-	let form = document.getElementById('blog-form');
+let blogAdmin = new Vue({
+	el: '#blog-entry-form',
+	delimiters: ['[[', ']]'],
+	data: {
+		testInfo: '',
+		isEditInProgress: false,
+        blogEntry: {
+			category: '',
+			title: '',
+			text_entry: '',
+			private: false
+		},
+		categories: []
+	},
+	methods: {
+		submitBlogEntryForm() {
+			const form = document.getElementById('blog-form');
 
-	form.action = 'private'
-
-	form.submit();
-}
+			form.submit();
+		},
+        getAllCategories() {
+		    fetch('blog-admin/api/GetAllCategories/')
+            .then(response => response.json())
+            .then((categories) => {
+                this.categories = categories;
+            });
+		}
+	},
+	mounted() {
+		this.getAllCategories();
+	}
+});
